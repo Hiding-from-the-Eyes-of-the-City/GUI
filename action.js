@@ -24,7 +24,7 @@
     canvas = document.getElementById("canvas");
     photo = document.getElementById("photo");
     circle = document.getElementById("circle");
-    name = document.getElementById("finished");
+    finished = document.getElementById("finished");
     text = document.getElementById("text");
 
     navigator.mediaDevices
@@ -65,19 +65,29 @@
     circle.addEventListener(
       "click",
       function(ev) {
-        takepicture();
+        takePicture();
         ev.preventDefault();
       },
       false
     );
 
-    clearphoto();
+    clearPhoto();
+  }
+
+  function changeText(num) {
+    finished.innerHTML = "You are now in the system " + num.toString() + ".";
+    text.innerHTML = " ";
+    setTimeout(function() {
+      finished.innerHTML = " ";
+      text.innerHTML =
+        "Line up your face in the square and press the button to take a picture.";
+    }, 7000);
   }
 
   // Fill the photo with an indication that none has been
   // captured.
 
-  function clearphoto() {
+  function clearPhoto() {
     var context = canvas.getContext("2d");
     context.fillStyle = "#AAA";
     context.fillRect(0, 0, canvas.width, canvas.height);
@@ -93,7 +103,7 @@
   // drawing that to the screen, we can change its size and/or apply
   // other changes before drawing it.
 
-  function takepicture() {
+  function takePicture() {
     var context = canvas.getContext("2d");
     if (width && height) {
       canvas.width = width;
@@ -107,20 +117,14 @@
       // save image, set to random number that represents individual identity
       var link = document.createElement("a");
       let num = Math.floor(Math.random() * 1000000 + 1);
+      changeText(num);
       link.download = num.toString() + ".png";
-      link.href = canvas.toDataURL();
+      link.href = canvas.toDataURL("image/png");
       link.click();
 
-      // document.getElementById("name").innerHTML = " ";
-      setTimeout(function() {
-        name.innerHTML =
-          "You are now in the system " +
-          num.toString() +
-          ". Thank you for your cooperation.";
-        text.innerHTML = " ";
-      }, 3000);
+      // document.getElementById("finished").innerHTML = " ";
     } else {
-      clearphoto();
+      clearPhoto();
     }
   }
 

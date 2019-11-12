@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static',filename='style.css') }}"
+    />
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="{{ url_for('static',filename='action.js') }}"></script>
+  </head>
+  <body>
+    <div id="rect"></div>
+    <p id="text">
+      Line up your face in the square and press the button to take a picture.
+    </p>
+    <p id="finished"></p>
+    <div class="camera">
+      <video id="video">Video stream not available.</video>
+      <button id="circle"></button>
+    </div>
+    <canvas id="canvas"> </canvas>
+    <div class="output">
+      <img id="photo" alt="The screen capture will appear in this box." />
+    </div>
+  </body>
+</html>

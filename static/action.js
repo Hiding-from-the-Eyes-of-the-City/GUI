@@ -131,6 +131,17 @@
 
   function runScript() {
     // ajax call
+    console.log("here");
+    $.ajax({
+      url: "/capture",
+      type: "POST",
+      success: function(response) {
+        console.log(response);
+      },
+      error: function(error) {
+        console.log(error);
+      }
+    });
   }
 
   // Set up our event listener to run the startup process

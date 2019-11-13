@@ -66,7 +66,6 @@
       "click",
       function(ev) {
         takePicture();
-        runScript();
         ev.preventDefault();
       },
       false
@@ -119,22 +118,23 @@
       var link = document.createElement("a");
       let num = Math.floor(Math.random() * 1000000 + 1);
       changeText(num);
+      runScript(num);
       link.download = num.toString() + ".png";
       link.href = canvas.toDataURL("image/png");
       link.click();
-
       // document.getElementById("finished").innerHTML = " ";
     } else {
       clearPhoto();
     }
   }
 
-  function runScript() {
+  function runScript(num) {
     // ajax call
     console.log("here");
     $.ajax({
       url: "/capture",
-      type: "POST",
+      type: "GET",
+      data: { name: num },
       success: function(response) {
         console.log(response);
       },

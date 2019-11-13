@@ -3,6 +3,8 @@ import face_recognition
 import cv2
 import numpy as np
 from os import path
+from time import sleep
+
 
 app = Flask('__name__')
 
@@ -12,11 +14,11 @@ def index():
 
 @app.route('/capture', methods=['GET'])
 def capture():
+    sleep(2)
     num = request.args.get('name')
     file = str(num)+'.png'
-    person_face_encoding = None
-    person_name = None
-
+    np.load.__defaults__=(None, True, True, 'ASCII')
+    print(file)
 
     try:
         if (path.exists(file)):
@@ -25,6 +27,8 @@ def capture():
             person_face_encoding = face_recognition.face_encodings(person_image)[0]
             print("Person encoding:", person_face_encoding.shape)
     except Exception as e:
+        person_face_encoding = np.array([1, 2])
+        person_name = str(num)
         print("No system argument provided, please enter an image file name, followed by person name")
         quit()
         raise
@@ -48,6 +52,9 @@ def capture():
         known_face_names = [person_name]
         np.save('encoding', known_face_encodings)
         np.save('names', known_face_names)
+
+
+    np.load.__defaults__=(None, False, True, 'ASCII')
 
     return 'success'
 

@@ -18,20 +18,25 @@ def capture():
     num = request.args.get('name')
     file = str(num)+'.png'
     np.load.__defaults__=(None, True, True, 'ASCII')
-    print(file)
+    print(path.exists(file))
 
-    try:
-        if (path.exists(file)):
-            person_image = face_recognition.load_image_file(file)
-            person_name = str(num)
-            person_face_encoding = face_recognition.face_encodings(person_image)[0]
-            print("Person encoding:", person_face_encoding.shape)
-    except Exception as e:
-        person_face_encoding = np.array([1, 2])
+    # try:
+    if (path.exists(file)):
+        person_image = face_recognition.load_image_file(file)
         person_name = str(num)
+        person_face_encoding = face_recognition.face_encodings(person_image)[0]
+        print("Person encoding:", person_face_encoding.shape)
+    else:
         print("No system argument provided, please enter an image file name, followed by person name")
         quit()
-        raise
+
+    # except Exception as e:
+    #     person_face_encoding = np.array([1, 2])
+    #     person_name = str(num)
+    #     print(e)
+    #     print("No system argument provided, please enter an image file name, followed by person name")
+    #     quit()
+    #     raise
 
     if(path.exists('encoding.npy') and path.exists('names.npy')):
         original_arr_encoding = np.load('encoding.npy')

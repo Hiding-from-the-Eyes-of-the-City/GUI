@@ -8,6 +8,7 @@ from ftplib import FTP
 from mtcnn.mtcnn import MTCNN
 
 app = Flask('__name__')
+detector = MTCNN()
 
 @app.route('/')
 def index():
@@ -23,6 +24,12 @@ def capture():
 
     # try:
     if (path.exists(file)):
+        image=cv2.imread(file)
+        too_many = False
+        results = detector.detect_faces(image)
+        if(len(results) > 1):
+            too_many = True
+        print(f"TOO MANY PEOPLE? {too_many}")
         person_image = face_recognition.load_image_file(file)
         person_name = str(num)
         person_face_encoding = face_recognition.face_encodings(person_image)[0]

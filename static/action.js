@@ -75,13 +75,13 @@
   }
 
   function changeText(num) {
-    finished.innerHTML = "You are now in the system " + num.toString() + ".";
+    finished.innerHTML = "You are now in the system " + "<b>" + num.toString() + "</b>" + ".";
     text.innerHTML = " ";
     setTimeout(function() {
       finished.innerHTML = " ";
       text.innerHTML =
         "Line up your face in the square and press the button to take a picture.";
-    }, 7000);
+    }, 10000);
   }
 
   // Fill the photo with an indication that none has been

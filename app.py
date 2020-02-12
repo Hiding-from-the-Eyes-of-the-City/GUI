@@ -19,7 +19,8 @@ def capture():
     num = request.args.get('name')
     file = str(num)+'.png'
     np.load.__defaults__=(None, True, True, 'ASCII')
-    print(path.exists(file))
+    print(file)
+    #print(path.exists(file))
 
     # try:
     if (path.exists(file)):

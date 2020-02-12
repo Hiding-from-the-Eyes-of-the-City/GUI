@@ -8,22 +8,22 @@ body {
 #rect {
   position: absolute;
   margin: auto;
-  top: -200px;
+  top: -60%;
   right: 0;
   bottom: 0;
   left: 0;
-  width:500px;
-  height:500px;
+  width:600px;
+  height:600px;
   border:10px solid white;
   overflow:hidden;
 }
 
 #circle {
   position: fixed;
-  top: 87%;
+  top: 70%;
   left: 90%;
-  height: 65px;
-  width: 65px;
+  height: 100px;
+  width: 100px;
   border-radius: 50%;
   background-color: white;
 }
@@ -61,6 +61,8 @@ body {
   width: 100%;
   text-align: center;
   margin: 0 auto;
+  font-size: 60px;
+  top: 45%;
 }
 
 #text {
@@ -68,4 +70,6 @@ body {
   width: 100%;
   text-align: center;
   margin: 0 auto;
+  font-size: 50px;
+  top: 45%;
 }

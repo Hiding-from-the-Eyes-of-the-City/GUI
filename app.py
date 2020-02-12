@@ -13,6 +13,24 @@ app = Flask('__name__')
 def index():
     return render_template("index.html")
 
+@app.route('/encoding', methods=['GET'])
+def encoding():
+    sleep(2)
+    path_to_file = "encoding.npy"
+    return send_file(
+         path_to_file,
+         as_attachment=True,
+         attachment_filename="encoding.npy")
+
+ @app.route('/names', methods=['GET'])
+ def names():
+     sleep(2)
+     path_to_file = "names.npy"
+     return send_file(
+          path_to_file,
+          as_attachment=True,
+          attachment_filename="names.npy")
+
 @app.route('/capture', methods=['GET'])
 def capture():
     sleep(2)
@@ -63,27 +81,27 @@ def capture():
 
     np.load.__defaults__=(None, False, True, 'ASCII')
 
-    host_names = ['192.168.2.122']
-    username = 'hiding'
-    password = 'nvidia'
-
-    ftp = FTP()
-    ftp.set_debuglevel(2)
-
-    for host in host_names:
-        print(host)
-        ftp.connect(host, 21)
-        ftp.login(username, password)
-
-        ftp.cwd("~/Desktop/hiding/Facial_Recognition/")
-
-        with open("encoding.npy", 'rb') as fp:
-            ftp.storbinary('STOR encoding.npy', fp)
-
-        with open("names.npy", 'rb') as fp:
-            ftp.storbinary('STOR names.npy', fp)
-
-        ftp.quit()
+    # host_names = ['192.168.2.122']
+    # username = 'hiding'
+    # password = 'nvidia'
+    #
+    # ftp = FTP()
+    # ftp.set_debuglevel(2)
+    #
+    # for host in host_names:
+    #     print(host)
+    #     ftp.connect(host, 21)
+    #     ftp.login(username, password)
+    #
+    #     ftp.cwd("~/Desktop/hiding/Facial_Recognition/")
+    #
+    #     with open("encoding.npy", 'rb') as fp:
+    #         ftp.storbinary('STOR encoding.npy', fp)
+    #
+    #     with open("names.npy", 'rb') as fp:
+    #         ftp.storbinary('STOR names.npy', fp)
+    #
+    #     ftp.quit()
     return 'success'
 
 
